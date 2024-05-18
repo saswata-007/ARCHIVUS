@@ -9,7 +9,7 @@ $users = mysqli_query($connection, $query);
 ?>
 
 <section class="dashboard">
-<?php if(isset($_SESSION['add-user-success'])) : ?>
+<?php if(isset($_SESSION['add-user-success'])) : //SHOWS IF ADD USER WAS SUCCESSFUL ?>
     <div class="success-message container">
         <p>
             <?php 
@@ -17,8 +17,44 @@ $users = mysqli_query($connection, $query);
             unset($_SESSION['add-user-success']);
             ?>
         </p>
-    <?php endif ?>
     </div>
+    <?php elseif(isset($_SESSION['edit-user-success'])) : //SHOWS IF EDIT USER WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-user-success'];
+            unset($_SESSION['edit-user-success']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['edit-user'])) : //SHOWS IF EDIT USER WASN'T SUCCESSFUL ?>
+    <div class="error-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-user'];
+            unset($_SESSION['edit-user']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['delete-user'])) : //SHOWS IF delete USER WASN'T SUCCESSFUL ?>
+    <div class="error-message container">
+        <p>
+            <?php 
+            echo $_SESSION['delete-user'];
+            unset($_SESSION['delete-user']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['delete-user-success'])) : //SHOWS IF delete USER IS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['delete-user-success'];
+            unset($_SESSION['delete-user-success']);
+            ?>
+        </p>
+    </div>
+    <?php endif ?>
     <div class="container dashboard__container">
         <aside>
             <ul>
@@ -40,6 +76,7 @@ $users = mysqli_query($connection, $query);
     </aside>
     <main>
         <h2>Manage Users</h2>
+        <?php if(mysqli_num_rows($users)>0) : ?>
         <table>
             <thead>
                 <tr>
@@ -56,12 +93,15 @@ $users = mysqli_query($connection, $query);
                     <td><?php echo "{$user['fname']} {$user['lname']}" ?></td>
                     <td><?php echo "{$user['username']}" ?></td>
                     <td><a href="<?php echo ROOT_URL?>admin/edit-user.php?id=<?php echo $user['id']?>" class="btn sm">Edit</a></td>
-                    <td><a href="<?php echo ROOT_URL?>admin/edit-user.php?id=<?php echo $user['id']?>" class="btn sm danger">Delete</a></td>
+                    <td><a href="<?php echo ROOT_URL?>admin/delete-user.php?id=<?php echo $user['id']?>" class="btn sm danger">Delete</a></td>
                     <td><?php echo $user['is_moderator'] ? 'Yes' : 'No' ?></td>
                 </tr>
                 <?php endwhile ?>
             </tbody>
         </table>
+        <?php else : ?>
+            <div class="error-message"><?= "NO USERS FOUND" ?></div>
+        <?php endif ?>
     </main>
     </div>
 </section>
