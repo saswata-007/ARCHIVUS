@@ -18,6 +18,24 @@ $posts = mysqli_query($connection, $query);
             ?>
         </p>
     </div>
+    <?php elseif (isset($_SESSION['edit-post-success'])) : //SHOWS IF EDIT POST WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-post-success'];
+            unset($_SESSION['edit-post-success']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['edit-post'])) : //SHOWS IF EDIT POST WAS NOT SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-post'];
+            unset($_SESSION['edit-post']);
+            ?>
+        </p>
+    </div>
     <?php endif ?>
     <div class="container dashboard__container">
         <aside>

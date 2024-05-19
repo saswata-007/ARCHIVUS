@@ -33,7 +33,7 @@ unset($_SESSION['add-post-data']);
             <textarea rows="10" name="body" placeholder="Body"><?= $body ?></textarea>
             <?php if(isset($_SESSION['user_is_moderator'])) : ?>
             <div class="form__control inline">
-                <input type="checkbox" id="is_featured" value="1" checked>
+                <input type="checkbox" id="is_featured" name="is_featured" value="1" checked>
                 <label for="is_featured">Featured</label>
             </div>
             <?php endif ?>
