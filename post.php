@@ -15,8 +15,8 @@
     <nav>
         <div class="container nav__container">
             <div class="nav__logo-name">
-                <a href="homepage.html"><img src="./images/logo.png" class="nav__logo-img"></a>
-                <a href="homepage.html" class="nav__logo">ARCHIVUS</a>
+                <a href="homepage.php"><img src="./images/logo.png" class="nav__logo-img"></a>
+                <a href="homepage.php" class="nav__logo">ARCHIVUS</a>
             </div>
             <ul class="nav__items">
                 <li><a href="blog.html">Blog</a></li>

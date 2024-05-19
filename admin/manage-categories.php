@@ -7,6 +7,52 @@ $categories = mysqli_query($connection, $query);
 ?>
 
 <section class="dashboard">
+<?php if(isset($_SESSION['add-category-success'])) : //SHOWS IF ADD CATEGORY WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['add-category-success'];
+            unset($_SESSION['add-category-success']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['add-category'])) : //SHOWS IF ADD CATEGORY WAS NOT SUCCESSFUL ?>
+    <div class="error-message container">
+        <p>
+            <?php 
+            echo $_SESSION['add-category'];
+            unset($_SESSION['add-category']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['edit-category'])) : //SHOWS IF EDIT CATEGORY WAS NOT SUCCESSFUL ?>
+    <div class="error-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-category'];
+            unset($_SESSION['edit-category']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['edit-category-success'])) : //SHOWS IF EDIT CATEGORY WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['edit-category-success'];
+            unset($_SESSION['edit-category-success']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['delete-category-success'])) : //SHOWS IF DELETE CATEGORY WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['delete-category-success'];
+            unset($_SESSION['delete-category-success']);
+            ?>
+        </p>
+    </div>
+    <?php endif ?>
     <div class="container dashboard__container">
         <aside>
             <ul>

@@ -9,7 +9,7 @@ include 'partials/header.php'
         </div>
         <div class="post__info">
             <a href="" class="category__button">Indian History</a>
-            <h2 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quidem!</a></h2>
+            <h2 class="post__title"><a href="post.php">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quidem!</a></h2>
             <p class="post__body">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quis excepturi architecto ex odit iste, autem necessitatibus. Labore atque illum voluptatibus? Enim eum consequuntur voluptates magni cupiditate maxime assumenda iusto?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus facilis delectus blanditiis reprehenderit, neque assumenda! Earum minus laudantium rem excepturi dignissimos, praesentium numquam voluptate optio commodi reiciendis magnam maiores recusandae ea. Necessitatibus temporibus voluptates voluptatum totam ipsum ad minus quis.
             </p>

@@ -1,32 +1,47 @@
 <?php
 include 'partials/header.php';
+
+// FETCH CATEGORIES FROM DATABASE
+$query = "SELECT * FROM categories";
+$categories = mysqli_query($connection, $query);
+
+// GET BACK FORM DATA IF FORM WAS INVALID
+$title = $_SESSION['add-post-data']['title'] ?? null;
+$body = $_SESSION['add-post-data']['body'] ?? null;
+
+// DELETE FROM DATA SESSION
+unset($_SESSION['add-post-data']);
 ?>
     <section class="form__section">
         <div class="container form__section-container">
             <h2>Add Post</h2>
+            <?php if(isset($_SESSION['add-post'])) : ?>
             <div class="alert__message error">
-                <p>this is an message</p>
+                <p>
+                    <?= $_SESSION['add-post']; 
+                    unset($_SESSION['add-post']);?>
+                </p>
             </div>
-        <form action="" enctype="multipart/form-data">
-            <input type="text" placeholder="Title">
-            <select>
-                <option value="1">Indian History</option>
-                <option value="1">Politics</option>
-                <option value="1">Accident</option>
-                <option value="1">Terror Attack</option>
-                <option value="1">Inventions</option>
-                <option value="1">War</option>
+            <?php endif ?>
+        <form action="<?= ROOT_URL ?>admin/add-post-logic.php" enctype="multipart/form-data" method="POST">
+            <input type="text" name="title" value="<?= $title ?>" placeholder="Title">
+            <select name="category">
+                <?php while($category = mysqli_fetch_assoc($categories)) : ?>
+                <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                <?php endwhile ?>
             </select>
-            <textarea rows="10" placeholder="Body"></textarea>
+            <textarea rows="10" name="body" placeholder="Body"><?= $body ?></textarea>
+            <?php if(isset($_SESSION['user_is_moderator'])) : ?>
             <div class="form__control inline">
-                <input type="checkbox" id="is_featured" checked>
+                <input type="checkbox" id="is_featured" value="1" checked>
                 <label for="is_featured">Featured</label>
             </div>
+            <?php endif ?>
             <div class="form__control">
                 <label for="thumbnail">Add Thumbnail</label>
-                <input type="file" id="thumbnail">
+                <input type="file" name="thumbnail" id="thumbnail">
             </div>
-            <button class="btn">Add Post</button>
+            <button class="btn" name="submit">Add Post</button>
         </form>
         </div>
     </section>
