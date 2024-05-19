@@ -47,7 +47,7 @@ if(isset($_SESSION['user-id'])){
                     </ul>
                 </li>
                 <?php else: ?>
-                <li><a href="<?php echo ROOT_URL ?>signup.php">Sign Up</a></li>
+                <li><a href="<?php echo ROOT_URL ?>signin.php">Sign In</a></li>
                 <?php endif ?>
             </ul>
         </div>

@@ -80,7 +80,7 @@ unset($_SESSION['signin-data']);
             </div>
             <h3 class="post-title"><a href="posts.html">28th January, 1950</a></h3>
             <div class="post-thumbnail">
-                <img src="./article2.png" alt="img" width="300px">
+                <img src="./images/article10.png" alt="img" width="300px">
             </div>
             <div class="post-body">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Id tempore, dignissimos at provident hic deserunt. Eligendi, consectetur, id magni doloribus et minima rem laborum, beatae illum officiis nihil facilis similique!
