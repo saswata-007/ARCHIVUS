@@ -36,6 +36,24 @@ $posts = mysqli_query($connection, $query);
             ?>
         </p>
     </div>
+    <?php elseif(isset($_SESSION['delete-post'])) : //SHOWS IF DELETE POST WAS NOT SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['delete-post'];
+            unset($_SESSION['delete-post']);
+            ?>
+        </p>
+    </div>
+    <?php elseif(isset($_SESSION['delete-post-success'])) : //SHOWS IF DELETE POST WAS SUCCESSFUL ?>
+    <div class="success-message container">
+        <p>
+            <?php 
+            echo $_SESSION['delete-post-success'];
+            unset($_SESSION['delete-post-success']);
+            ?>
+        </p>
+    </div>
     <?php endif ?>
     <div class="container dashboard__container">
         <aside>
