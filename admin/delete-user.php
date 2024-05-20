@@ -19,8 +19,19 @@ if(isset($_GET['id'])){
         }
     }
 
-    // FOR LATER
     // FETCH ALL THUMBNAILS OF USER"S POSTS AND DELETE THEM
+    $thumbnails_query = "SELECT thumbnail FROM posts WHERE author_id=$id";
+    $thumbnails_result = mysqli_query($connection, $thumbnails_query);
+    if(mysqli_num_rows($thumbnails_result)>0){
+        while($thumbnail = mysqli_fetch_assoc($thumbnails_result)){
+            $thumbnail_path = '../uploads/' . $thumbnail['thumbnail'];
+
+            // DELETE THUMBNAIL FROM UPLOADS FOLDER IF EXISTS
+            if($thumbnail_path){
+                unlink($thumbnail_path);
+            }
+        }
+    }
 
 
 
@@ -31,7 +42,7 @@ if(isset($_GET['id'])){
     if(mysqli_errno($connection)){
         $_SESSION['delete-user'] = "Couldn't delete '{$user['fname']} '{$user['lname']}'";
     } else{
-        $_SESSION['delete-user-success'] = "'{$user['fname']} '{$user['lname']}' has been deleted successfully";
+        $_SESSION['delete-user-success'] = "{$user['fname']} {$user['lname']} has been deleted successfully";
     }
 }
 
