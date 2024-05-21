@@ -1,204 +1,113 @@
 <?php
-include 'partials/header.php'
+include 'partials/header.php';
+
+// FETCH FEATURED POSTS FROM DATABASE
+$featured_query = "SELECT * FROM posts WHERE is_featured=1";
+$featured_result = mysqli_query($connection, $featured_query);
+$featured = mysqli_fetch_assoc($featured_result);
+
+// FETCH ALL POSTS FROMS POSTS TABLE
+$query = "SELECT * FROM posts ORDER BY date_time DESC";
+$posts = mysqli_query($connection, $query);
 ?>
-<!--==========================================================featured============================================> -->
-<section class="featured">
-    <div class="container featured__container">
-        <div class="post__thumbnail">
-            <img src="./images/article4.png">
-        </div>
-        <div class="post__info">
-            <a href="" class="category__button">Indian History</a>
-            <h2 class="post__title"><a href="post.php">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quidem!</a></h2>
-            <p class="post__body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quis excepturi architecto ex odit iste, autem necessitatibus. Labore atque illum voluptatibus? Enim eum consequuntur voluptates magni cupiditate maxime assumenda iusto?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus facilis delectus blanditiis reprehenderit, neque assumenda! Earum minus laudantium rem excepturi dignissimos, praesentium numquam voluptate optio commodi reiciendis magnam maiores recusandae ea. Necessitatibus temporibus voluptates voluptatum totam ipsum ad minus quis.
-            </p>
-            <div class="post__auther-avatar">
-                <img src="./images/avatar2.jpg">
+
+<!-- SHOW FEATURED POSTS IF THERE'S ANY -->
+<?php if (mysqli_num_rows($featured_result) == 1) : ?>
+
+    <section class="featured">
+        <div class="container featured__container">
+            <div class="post__thumbnail">
+                <img src="./uploads/<?= $featured['thumbnail'] ?>">
             </div>
-            <div class="post__auther-info">
-                <h5>By: Rahit Kumar Makhal</h5>
-                <small>April 03,2024 - 18:44</small>
+            <div class="post__info">
+                <?php
+                
+                // FETCH CATEGORY FROM CATEGORIES TABLE USING CATEGORY_ID OF POST
+                $category_id = $featured['category_id'];
+                $category_query = "SELECT * FROM categories WHERE id=$category_id";
+                $category_result = mysqli_query($connection, $category_query);
+                $category = mysqli_fetch_assoc($category_result);
+                
+                ?>
+                <a href="<?= ROOT_URL ?>category-title.php?id=<?= $category['id']?>" class="category__button"><?= $category['title'] ?></a>
+                <h2 class="post__title"><a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>"><?= $featured['title'] ?></a></h2>
+                <p class="post__body">
+                <?= substr($featured['body'], 0, 300) ?>...
+                </p>
+                <div class="post__auther-avatar">
+                    <?php
+                        // FETCH AUTHOR FROM USERS TABLE USING AUTHOR_ID
+                        $author_id = $featured['author_id'];
+                        $author_query = "SELECT * FROM users WHERE id=$author_id";
+                        $author_result = mysqli_query($connection, $author_query);
+                        $author = mysqli_fetch_assoc($author_result);
+                    ?>
+                    <img src="./uploads/<?= $author['profile_picture'] ?>">
+                </div>
+                <div class="post__auther-info">
+                    <h5>By: <?= "{$author['fname']} {$author['lname']}" ?></h5>
+                    <small>
+                        <?= date("M d, Y - H:i", strtotime($featured['date_time'])) ?>
+                    </small>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php endif ?>
 <!-- ========================================================posts====================================== -->
 <section class="posts">
     <div class="container posts__container">
+        <?php while ($post = mysqli_fetch_assoc($posts)) : ?>
         <article class="post">
             <div class="post__thumbnail">
-                <img src="./images/article1.png">
+                <img src="./uploads/<?= $post['thumbnail'] ?>">
             </div>
             <div class="post__info">
-                <a href="" class="category__button">War</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, consequatur!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur.</p>
+            <?php
+                
+                // FETCH CATEGORY FROM CATEGORIES TABLE USING CATEGORY_ID OF POST
+                $category_id = $post['category_id'];
+                $category_query = "SELECT * FROM categories WHERE id=$category_id";
+                $category_result = mysqli_query($connection, $category_query);
+                $category = mysqli_fetch_assoc($category_result);
+                
+                ?>
+                <a href="<?= ROOT_URL ?>category-title.php?id=<?= $category['id']?>" class="category__button"><?= $category['title'] ?></a>
+                <h3 class="post__title"><a href="<?= ROOT_URL ?>post.php?id=<?= $post['id']?>"><?= $post['title'] ?></a></h3>
+                <p class="post__body"><?= substr($post['body'], 0, 150)?>...</p>
                 <div class="post__auther">
+                <?php
+                        // FETCH AUTHOR FROM USERS TABLE USING AUTHOR_ID
+                        $author_id = $post['author_id'];
+                        $author_query = "SELECT * FROM users WHERE id=$author_id";
+                        $author_result = mysqli_query($connection, $author_query);
+                        $author = mysqli_fetch_assoc($author_result);
+                    ?>
                     <div class="post__auther-avatar">
-                        <img src="./images/avatar1.jpg">
+                        <img src="./uploads/<?= $author['profile_picture'] ?>">
                     </div>
-                    <div class="post__auther-info"><h5>By: Saswata Kayal</h5>
-                    <small>April 02,2024 - 10:21</small>
+                    <div class="post__auther-info">
+                        <h5>By: <?= "{$author['fname']} {$author['lname']}" ?></h5>
+                        <small>
+                        <?= date("M d, Y - H:i", strtotime($post['date_time'])) ?>
+                        </small>
                     </div>
                 </div>
             </div>
         </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article3.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Politics</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, consequatur!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur.</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar3.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Achirangshu Srimani</h5>
-                    <small>April 03,2024 - 06:41</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article5.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Indian History</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, consequatur!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur.</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar2.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Rahit Kumar Makhal</h5>
-                    <small>April 02,2024 - 09:01</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article2.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Accident</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, consequatur!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur.</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar1.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Saswata Kayal</h5>
-                    <small>April 0,2024 - 10:35</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article6.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Terror Attack</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, consequatur!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur.</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar3.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Achirangshu Srimani</h5>
-                    <small>April 02,2024 - 9:21</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article7.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">War</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab error asperiores maxime modi corporis.</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum assumenda iusto ex sit commodi magnam, soluta eum consequuntur officiis perferendis iste nesciunt quisquam facere fuga? Aliquam labore aut voluptatibus dolor quos, similique illo recusandae.</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar2.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Rahit Kumar Makhal</h5>
-                    <small>April 01,2024 - 15:51</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article8.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Inventions</a>
-                <h3 class="post__title"><a href="post.html">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil.</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae reprehenderit eveniet laudantium eum officia obcaecati ex, dignissimos magnam cum nisi omnis rem nesciunt? Quam..</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar1.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Saswata Kayal</h5>
-                    <small>April 02,2024 - 11:09</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article9.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Politics</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing!</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet, consectetur adipisicing..</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar3.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Achirangshu Srimani</h5>
-                    <small>April 01,2024 - 6:33</small>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/article10.png">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">War</a>
-                <h3 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti, officia cupiditate?</a></h3>
-                <p class="post__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore nesciunt neque, ea quam unde cupiditate laboriosam fugit sequi magnam aspernatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio ipsum a nesciunt praesentium excepturi hic?</p>
-                <div class="post__auther">
-                    <div class="post__auther-avatar">
-                        <img src="./images/avatar3.jpg">
-                    </div>
-                    <div class="post__auther-info"><h5>By: Rahit Kumar Makhal</h5>
-                    <small>April 01,2024 - 6:59</small>
-                    </div>
-                </div>
-            </div>
-        </article>
+        <?php endwhile ?>
     </div>
 </section>
 <!-- =====================================post end here ======================================== -->
 <section class="category__buttons">
     <div class="container category__buttons-container">
-        <a href="category-title.html" class="category__button">Indian History</a>
-        <a href="category-title.html" class="category__button">Politics</a>
-        <a href="category-title.html" class="category__button">Accident</a>
-        <a href="category-title.html" class="category__button">Terror Attack</a>
-        <a href="category-title.html" class="category__button">Inventions</a>
-        <a href="category-title.html" class="category__button">War</a>
+        <?php
+            $all_categories_query = "SELECT * FROM categories";
+            $all_categories_result = mysqli_query($connection, $all_categories_query);
+        ?>
+        <?php while($category = mysqli_fetch_assoc($all_categories_result)) : ?>
+        <a href="<?= ROOT_URL ?>category-title.php?id=<?= $category['id']?>" class="category__button"><?= $category['title'] ?></a>
+        <?php endwhile ?>
     </div>
 </section>
 

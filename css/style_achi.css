@@ -104,11 +104,12 @@ nav{
     box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
 }
 
+
 .nav__container {
-    height: 100%;
-    display: flex;
+    display:flex;
     align-items: center;
-    justify-content: space-between;
+    gap:80vh;
+    height: 100%;
 }
 
 .profile__picture {
@@ -119,11 +120,12 @@ nav{
     border: .3rem solid var(--color-bg)
 }
 .nav__logo-img {
+    
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     overflow: hidden;
-    border: .3rem solid var(--color-bg);
+    border: .2rem solid var(--color-bg);
     background: var(--color-white);
 }
 .nav__logo {
@@ -131,12 +133,14 @@ nav{
     font-size: 1.5rem;
 }
 .nav__logo-name{
+    margin-left: 2rem;
     display: flex;
     align-items: center;
     gap: 2rem;
 
 }
 .nav__items {
+    
     display: flex;
     align-items: center;
     gap: 4rem;
@@ -175,7 +179,7 @@ nav{
     color: var(--color-white)
 }
 
-/*==========================================================end of nav bar start category /posts ============================================*/
+/* /==========================================================end of nav bar start category /posts ============================================/ */
 .category__button {
     background: var(--color-primary-dark);
     color: var(--color-white);
@@ -196,14 +200,17 @@ nav{
 }
 /* ==============================================post================================== */
 .post__thumbnail img{
-    border:0.3rem solid var(--color-primary-light);
+    border:0.4rem solid var(--color-primary-light);
     overflow: hidden;
-    filter: saturate(0);
-    border-radius:  0.8rem;             /*modified*/
-    transition: all ease 0.5s;
+    filter:saturate(0);
+    border-radius:  0.8rem;             
+    transition: all ease 0.7s;
+}
+.post__thumbnail img:hover{
+    border:0.2rem solid var(--color-gray-900);               
 }
 .post:hover .post__thumbnail img {
-    /* filter: saturate(1); */
+    filter: saturate(0);
     transition: filter 500ms ease;
 }
 
@@ -223,7 +230,11 @@ nav{
     overflow: hidden;
 }
 .post__info{
+
     padding-top:0.8rem;
+}
+.featured_container .post_body{                   
+    width:90vh;
 }
 /* =======================================================featured posts ============================================ */
 
@@ -232,6 +243,7 @@ nav{
 }
 
 .featured__container {
+    padding-left:4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -245,7 +257,6 @@ nav{
 .posts .post__thumbnail img{
     width:25rem;
 }
-
 .posts__container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -317,6 +328,7 @@ footer{
 }
 
 .footer__container {
+    padding-left: 10rem;   /*MODIFIED*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
@@ -365,7 +377,15 @@ footer ul a:hover {
     margin-left: .7rem;
     padding: .5rem 0;
 }
-
+.search{
+    padding-left: 1rem;
+    display:flex;
+    flex-direction: row;
+}
+.search__bar .btn{
+    width:10rem;
+    
+}
 /* =============================button style============================== */
 
 .btn{
@@ -399,32 +419,51 @@ footer ul a:hover {
 }
 /* ==========================================contact===================================================================== */
 .contact_container {
-    padding: 10rem 40rem;
+    padding: 10rem 45rem;
 }
-/*-----------------------------------------------sign up page--------------------------------------------*/
+.contact_container form{
+    background-color: var(--color-bg);
+}
+.contact_container .abc{
+    width:100vh;
+}
+.contact_container h2{
+    width:40vh;
+}
+
+    
+/* /-----------------------------------------------sign up page--------------------------------------------/ */
 
 .form__section {
+    margin-bottom:10px;
     display: grid;
     place-items: center;
     height: 100vh;
 }
 .form__section-container {
+    padding-left: 15rem;
     width: var(--form-weidth);
 }
-
+.form__section-container h2{
+    padding-left: 4rem;
+}
 form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+form input, select{
+    width:50vh;
 }
 .form__control {
     display: flex;
     flex-direction: column;
     gap: .6rem;
 }
-.form__control.inline {
+form .inline {
+    margin-left:5rem;
+    display: flex;
     flex-direction: row;
-    align-items: center;
 }
 
 input, textarea, select {
@@ -444,7 +483,7 @@ input, textarea, select {
 }
 
 .btn {
-    width: fit-content;
+    width:40vh;
     padding: .6rem 1.2rem;
     background-color: var(--color-primary);
     border-radius: var(--card-border-radius-2);
@@ -468,6 +507,9 @@ input, textarea, select {
 .btn:hover {
     background: var(--color-white);
     color: var(--color-bg);
+}
+.alert__message{
+    padding-left: 4rem;
 }
 
 /* ==========================================dashboard===================================================================== */
@@ -785,7 +827,7 @@ form .form-content .success-message p{
 }
 
 
-/*========================================comment=============================*/ 
+/* /========================================comment=============================/  */
 .comment {
     width: 57%;
     margin-left: 22rem;
@@ -829,4 +871,9 @@ form .form-content .success-message p{
     background-color: var(--color-gray-900);
     color:white;
     font-weight: 600px;
+}
+
+/* /========================================add user=============================/  */
+.form__section-container form{
+    background-color: var(--color-bg);  
 }

@@ -20,6 +20,7 @@ if(isset($_SESSION['user-id'])){
     <title>Archivus</title>
 
     <link rel="stylesheet" href="<?php echo ROOT_URL ?>css/style.css">
+    <link rel="icon" type="image/ico" href="<?php echo ROOT_URL ?>images/favicon.ico">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">

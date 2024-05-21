@@ -1,6 +1,8 @@
 <?php
 require 'config/constants.php';
 
+//include 'partials/header.php';
+
 $username_email = $_SESSION['signin-data']['username_email'] ?? null;
 $password = $_SESSION['signin-data']['password  '] ?? null;
 
@@ -92,3 +94,6 @@ unset($_SESSION['signin-data']);
     
 </body>
 </html>
+<?php
+//include 'partials/footer.php';
+?>
