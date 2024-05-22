@@ -13,9 +13,9 @@ if (isset($_GET['id'])) {
 
 ?>
 <section class="singlepost">
-    <div class="container   singlepost__container">
-        <h2><?= $post['title'] ?></h2>
-        <div class="post__auther">
+    <div class="container singlepost__container">
+        <h2><?= htmlspecialchars($post['title']) ?></h2>
+        <div class="post__author">
             <?php
             // FETCH AUTHOR FROM USERS TABLE USING AUTHOR_ID
             $author_id = $post['author_id'];
@@ -23,68 +23,66 @@ if (isset($_GET['id'])) {
             $author_result = mysqli_query($connection, $author_query);
             $author = mysqli_fetch_assoc($author_result);
             ?>
-            <div class="post__auther-avatar">
-                <img src="./uploads/<?= $author['profile_picture'] ?>">
+            <div class="post__author-avatar">
+                <img class="pp" src="./uploads/<?= htmlspecialchars($author['profile_picture']) ?>">
             </div>
-            <div class="post__auther-info">
-                <h5>By: <?= "{$author['fname']} {$author['lname']}" ?></h5>
+            <div class="post__author-info">
+                <h5>By: <?= htmlspecialchars("{$author['fname']} {$author['lname']}") ?></h5>
                 <small>
                     <?= date("M d, Y - H:i", strtotime($post['date_time'])) ?>
                 </small>
             </div>
         </div>
         <div class="singlepost__thumbnail">
-            <img src="./uploads/<?= $post['thumbnail'] ?>">
+            <img src="./uploads/<?= htmlspecialchars($post['thumbnail']) ?>">
         </div>
-        <p><?= $post['body'] ?></p>
+        <p><?= nl2br(htmlspecialchars($post['body'])) ?></p>
     </div>
 </section>
-<!--==============================================end of singelpost======================================-->
+
+<!--==============================================end of singlepost======================================-->
 
 <section class="comment">
     <div class="container comments__container">
         <h2>Comments</h2>
-        <div class="comments">
-            <div class="comment__auther-avatar">
-                <img src="./images/avatar1.jpg">
-            </div>
-            <div class="comment__auther-info">
-                <h5>By: Saswata Kayal</h5>
-                <small>April 03,2024 - 18:44</small>
-            </div>
-            <div class="comment__info">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam impedit praesentium quaerat dicta unde velit, porro nisi eaque voluptate itaque quam nostrum enim est, et minima vitae exercitationem sequi at.</p>
-            </div>
-            <h5>Reply</h5>
-        </div>
 
-        <div class="comments">
-            <div class="comment__auther-avatar">
-                <img src="./images/avatar3.jpg">
-            </div>
-            <div class="comment__auther-info">
-                <h5>By: Achirangshu Srimani</h5>
-                <small>June 09,2023 - 15:01</small>
-            </div>
-            <div class="comment__info">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam impedit praesentium quaerat dicta unde velit, porro nisi eaque voluptate itaque quam nostrum enim est, et minima vitae exercitationem sequi at.</p>
-            </div>
-            <h5>Reply</h5>
-        </div>
+        <?php
+        // FETCH COMMENTS FROM DATABASE
+        $comment_query = "SELECT comment.content, comment.timestamp, users.fname, users.lname, users.profile_picture FROM comment INNER JOIN users ON comment.user_id = users.id WHERE comment.blog_id = $id ORDER BY comment.timestamp DESC";
+        $comment_result = mysqli_query($connection, $comment_query);
+        ?>
 
-        <form class="comment__box">
-            <div>
-                <textarea name="comment__area" rows="4" cols="40"></textarea>
-            </div>
-            <div><button name="comment__submit">comment</button></div>
-            <div class="comment__auther-avatar">
-                <img src="./images/avatar2.jpg">
-            </div>
-            <div class="comment__auther-info">
-                <h5>By: Rahit Kumar Makal </h5>
-            </div>
-        </form>
+        <?php if(mysqli_num_rows($comment_result) > 0): ?>
+            <?php while($comment = mysqli_fetch_assoc($comment_result)): ?>
+                <div class="comment">
+                    <div class="comment__author-avatar">
+                        <img class="pp" src="./uploads/<?= htmlspecialchars($comment['profile_picture']) ?>">
+                    </div>
+                    <div class="comment__author-info">
+                        <h5>By: <?= htmlspecialchars("{$comment['fname']} {$comment['lname']}") ?></h5>
+                        <small><?= date("M d, Y - H:i", strtotime($comment['timestamp'])) ?></small>
+                    </div>
+                    <div class="comment__info">
+                        <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No comments yet. Be the first to comment!</p>
+        <?php endif; ?>
 
+        <?php if(isset($_SESSION['user-id'])): ?>
+            <form class="comment__box" action="<?= ROOT_URL ?>admin/add-comment.php" method="POST">
+                <div>
+                    <textarea name="content" rows="4" cols="40" required></textarea>
+                </div>
+                <input type="hidden" name="blog_id" value="<?= $id ?>">
+                <input type="hidden" name="user_id" value="<?= $_SESSION['user-id'] ?>">
+                <div><button name="comment-submit">Comment</button></div>
+            </form>
+        <?php else: ?>
+            <p>You have to <a href="<?= ROOT_URL ?>signin.php">log in</a> to write a comment.</p>
+        <?php endif; ?>
     </div>
 </section>
 

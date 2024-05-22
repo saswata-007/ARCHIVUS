@@ -1,18 +1,45 @@
 <?php
-include 'partials/header.php'
+require 'partials/header.php';
+
+// Check for success message
+if (isset($_SESSION['success'])) {
+    echo '<div class="success-message">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']); // Remove success message after displaying
+}
+
+// Check for error message
+if (isset($_SESSION['error'])) {
+    echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
+    unset($_SESSION['error']); // Remove error message after displaying
+}
 ?>
 
-    <div class="contact_container">
-        <h1>Contact Us</h1>
-        <form action="" method="post">
-            <input type="text" placeholder="Your Name">
-            <input type="text" placeholder="Your Email">
-            <input type="text" placeholder="Subject">
-            <textarea id="message" name="message" rows="5" required placeholder="Message"></textarea>
-            
-            <button type="submit" class="btn">Send Message</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Archivus</title>
+    <link rel="stylesheet" href="<?php echo ROOT_URL ?>css/style.css">
+</head>
+<body>
+
+<!-- Contact Form -->
+<section class="contact-form">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form action="<?= ROOT_URL ?>contact_submit.php" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Submit</button>
         </form>
     </div>
-    <?php
-include 'partials/footer.php'
+</section>
+
+</body>
+</html>
+<?php
+require 'partials/footer.php';
 ?>

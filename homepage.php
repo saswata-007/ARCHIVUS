@@ -9,6 +9,7 @@ $featured = mysqli_fetch_assoc($featured_result);
 // FETCH ALL POSTS FROMS POSTS TABLE
 $query = "SELECT * FROM posts ORDER BY date_time DESC";
 $posts = mysqli_query($connection, $query);
+
 ?>
 
 <!-- SHOW FEATURED POSTS IF THERE'S ANY -->

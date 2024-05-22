@@ -1,9 +1,18 @@
 <?php
 include 'partials/header.php';
 
-// FETCH CURRENT USER'S POSTS FROM THE DATABASE
+// FETCH POSTS FROM THE DATABASE
 $current_user_id = $_SESSION['user-id'];
-$query = "SELECT id, title, category_id FROM posts WHERE author_id=$current_user_id ORDER BY id DESC";
+$is_moderator = isset($_SESSION['user_is_moderator']) && $_SESSION['user_is_moderator'] === true;
+
+if ($is_moderator) {
+    // If the user is a moderator, fetch all posts
+    $query = "SELECT id, title, category_id FROM posts ORDER BY id DESC";
+} else {
+    // If the user is not a moderator, fetch only their posts
+    $query = "SELECT id, title, category_id FROM posts WHERE author_id=$current_user_id ORDER BY id DESC";
+}
+
 $posts = mysqli_query($connection, $query);
 
 ?>
@@ -71,6 +80,10 @@ $posts = mysqli_query($connection, $query);
             <h5>Add Category</h5></a></li>
             <li><a href="manage-categories.php"><i class="uil uil-list-ul"></i>
             <h5>Manage Category</h5></a></li>
+            <li><a href="manage-comments.php"><i class="uil uil-comment-dots"></i>
+            <h5>Manage Comments</h5></a></li>
+            <li><a href="manage-support.php"><i class="uil uil-envelope"></i>
+            <h5>Manage Support</h5></a></li>
             <?php endif ?>
         </ul>
     </aside>
