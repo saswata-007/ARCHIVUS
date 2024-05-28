@@ -56,21 +56,25 @@ $users = mysqli_query($connection, $query);
     </div>
     <?php endif ?>
     <div class="container dashboard__container">
-        <aside>
+    <aside>
             <ul>
             <li><a href="add-post.php"><i class="uil uil-pen"></i>
             <h5>Add Post</h5></a></li>
-            <li><a href="index.php"><i class="uil uil-postcard"></i>
+            <li><a href="index.php" ><i class="uil uil-postcard"></i>
             <h5>Manage Post</h5></a></li>
             <?php if(isset($_SESSION['user_is_moderator'])): ?>
             <li><a href="add-user.php"><i class="uil uil-user-plus"></i>
             <h5>Add User</h5></a></li>
-            <li><a href="manage-user.php"class="active"><i class="uil uil-users-alt"></i>
+            <li><a href="manage-user.php" class="active"><i class="uil uil-users-alt"></i>
             <h5>Manage User</h5></a></li>
             <li><a href="add-category.php"><i class="uil uil-edit"></i>
             <h5>Add Category</h5></a></li>
             <li><a href="manage-categories.php"><i class="uil uil-list-ul"></i>
             <h5>Manage Category</h5></a></li>
+            <li><a href="manage-comments.php"><i class="uil uil-comment-dots"></i>
+            <h5>Manage Comments</h5></a></li>
+            <li><a href="manage-support.php"><i class="uil uil-envelope"></i>
+            <h5>Manage Support</h5></a></li>
             <?php endif ?>
         </ul>
     </aside>

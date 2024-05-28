@@ -26,13 +26,13 @@ if (isset($_SESSION['error'])) {
 
 <!-- Contact Form -->
 <section class="contact-form">
-    <div class="container">
-        <h2>Contact Us</h2>
-        <form action="<?= ROOT_URL ?>contact_submit.php" method="post">
+    <div>
+        <h2 class="contact">Contact Us</h2>
+        <form action="<?= ROOT_URL ?>contact_submit.php" method="post" class="contact_container">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <input type="text" name="subject" placeholder="Subject" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <textarea name="message" rows="5" cols="71" placeholder="Your Message" required></textarea>
             <button type="submit" class="btn">Submit</button>
         </form>
     </div>

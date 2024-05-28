@@ -17,8 +17,8 @@ if (isset($_GET['id'])) {
 ?>
 
 <section class="form__section">
-    <div class="container form__section-container">
-        <h2>Edit Post</h2>
+    <div class="container form__section-container-editpost">
+        <h2 class="editpost">Edit Post</h2>
         <form action="<?= ROOT_URL ?>admin/edit-post-logic.php" enctype="multipart/form-data" method="POST">
             <input type="hidden" name="id" value="<?= $post['id'] ?>">
             <input type="hidden" name="previous_thumbnail" value="<?= $post['thumbnail'] ?>">
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
                 <?php endwhile ?>
             </select>
             <?php if(isset($_SESSION['user_is_moderator'])) : ?>
-            <textarea rows="10" name="body" placeholder="Body"><?= $post['body'] ?></textarea>
+            <textarea rows="10" cols="71" name="body" placeholder="Body"><?= $post['body'] ?></textarea>
             <div class="form__control inline">
                 <input type="checkbox" name="is_featured" id="is_featured" value="1" <?= $post['is_featured'] ? 'checked' : '' ?>>
                 <label for="is_featured">Featured</label>

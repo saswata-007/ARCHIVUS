@@ -13,8 +13,8 @@ $body = $_SESSION['add-post-data']['body'] ?? null;
 unset($_SESSION['add-post-data']);
 ?>
     <section class="form__section">
-        <div class="container form__section-container">
-            <h2>Add Post</h2>
+        <div class="container form__section-container-addpost">
+            <h2 class="addpost" >Add Post</h2>
             <?php if(isset($_SESSION['add-post'])) : ?>
             <div class="alert__message error">
                 <p>
@@ -30,7 +30,7 @@ unset($_SESSION['add-post-data']);
                 <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
                 <?php endwhile ?>
             </select>
-            <textarea rows="10" name="body" placeholder="Body"><?= $body ?></textarea>
+            <textarea rows="10" cols="71" name="body" placeholder="Body"><?= $body ?></textarea>
             <?php if(isset($_SESSION['user_is_moderator'])) : ?>
             <div class="form__control inline">
                 <input type="checkbox" id="is_featured" name="is_featured" value="1" checked>

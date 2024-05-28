@@ -1,5 +1,7 @@
 <?php
-require 'config/constants.php';
+// require 'config/constants.php';
+
+include 'partials/header.php';
 
 // GET BACK FORM DATA IF THERE WAS AN REGISTRATION ERROR
 $fname = $_SESSION['signup-data']['fname'] ?? null;
@@ -11,6 +13,10 @@ $confirmpassword = $_SESSION['signup-data']['confirmpassword'] ?? null;
 
 // DELETE SIGNUP SESSION
 unset($_SESSION['signup-data']);
+
+// Fetch the latest post
+$query = "SELECT * FROM posts ORDER BY date_time DESC LIMIT 1";
+$posts = mysqli_query($connection, $query);
 ?>
 
 
@@ -32,7 +38,7 @@ unset($_SESSION['signup-data']);
                     <h3 class="title">Sign Up</h3>
                     <?php 
                         if(isset($_SESSION['signup'])) : ?>
-                            <div class="error-message">
+                            <div class="error_message">
                                 <p><?php 
                                 echo $_SESSION['signup'];
                                 unset($_SESSION['signup']); 
@@ -69,28 +75,51 @@ unset($_SESSION['signup-data']);
                             <label for="avatar">profile picture</label>
                             <input type="file" name="profile_picture" id="avatar">
                         </div>
-                        <div class="btn input-box">
-                            <input type="submit" name="submit" value="Create Account">
+                        <div >
+                            <input type="submit" name="submit" value="Create Account" class="signup-button">
                         </div>
                         <small class="text">Already have an account?<a href="signin.php"> Sign In</a></small>
                     </div>
                 </div>
             </div>
         </form>
-        <div class="post">
-            <div class="post-author-info">
-                <span>By:</span><h5>devolopment team of Archivus</h5>    
-            </div>
-            <h4 class="post-title"><a href="posts.html">Lorem ipsum dolor sit amet.</a></h4>
-            <div class="post-thumbnail">
-                <img src="./images/article7.png" alt="img" width="300px">
-            </div>
-            <div class="post-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id tempore, dignissimos at provident hic deserunt. Eligendi, consectetur, id magni doloribus et minima rem laborum, beatae illum officiis nihil facilis similique!
-            </div>
-        </div>
+        <section class="post">
+                <?php while ($post = mysqli_fetch_assoc($posts)) : ?>
+                   
+                        <div class="post__author">
+                            <?php
+                            // Fetch author from users table using author_id
+                            $author_id = $post['author_id'];
+                            $author_query = "SELECT * FROM users WHERE id=$author_id";
+                            $author_result = mysqli_query($connection, $author_query);
+                            $author = mysqli_fetch_assoc($author_result);
+                            ?>
+                            <div class="post__author-avatar">
+                                <img class="pp" src="./uploads/<?= $author['profile_picture'] ?>">
+                            </div>
+                            <div class="post__author-info">
+                                <h5 class="text-black" >By: <?= "{$author['fname']} {$author['lname']}" ?></h5>
+                                <small>
+                                    <?= date("M d, Y - H:i", strtotime($post['date_time'])) ?>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="post-thumbnail">
+                            <img class="sign-posts" src="./uploads/<?= $post['thumbnail'] ?>">
+                        </div>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a></h3>
+                            <p class="post-body"><?= substr($post['body'], 0, 150) ?>...</p>
+                        </div>
+                    
+                <?php endwhile ?>
+            </section>
     </div> 
     </div>
     
 </body>
 </html>
+
+<?php
+include 'partials/footer.php';
+?>

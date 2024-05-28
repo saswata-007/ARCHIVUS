@@ -50,18 +50,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['support_id'])) {
         </div>
     <?php endif ?>
     <div class="container dashboard__container">
-        <aside>
+    <aside>
             <ul>
-                <li><a href="add-post.php"><i class="uil uil-pen"></i><h5>Add Post</h5></a></li>
-                <li><a href="index.php" class="active"><i class="uil uil-postcard"></i><h5>Manage Post</h5></a></li>
-                <li><a href="add-user.php"><i class="uil uil-user-plus"></i><h5>Add User</h5></a></li>
-                <li><a href="manage-user.php"><i class="uil uil-users-alt"></i><h5>Manage User</h5></a></li>
-                <li><a href="add-category.php"><i class="uil uil-edit"></i><h5>Add Category</h5></a></li>
-                <li><a href="manage-categories.php"><i class="uil uil-list-ul"></i><h5>Manage Category</h5></a></li>
-                <li><a href="manage-comments.php"><i class="uil uil-comment-dots"></i><h5>Manage Comments</h5></a></li>
-                <li><a href="manage-support.php"><i class="uil uil-envelope"></i><h5>Manage Support</h5></a></li>
-            </ul>
-        </aside>
+            <li><a href="add-post.php"><i class="uil uil-pen"></i>
+            <h5>Add Post</h5></a></li>
+            <li><a href="index.php" ><i class="uil uil-postcard"></i>
+            <h5>Manage Post</h5></a></li>
+            <?php if(isset($_SESSION['user_is_moderator'])): ?>
+            <li><a href="add-user.php"><i class="uil uil-user-plus"></i>
+            <h5>Add User</h5></a></li>
+            <li><a href="manage-user.php"><i class="uil uil-users-alt"></i>
+            <h5>Manage User</h5></a></li>
+            <li><a href="add-category.php"><i class="uil uil-edit"></i>
+            <h5>Add Category</h5></a></li>
+            <li><a href="manage-categories.php"><i class="uil uil-list-ul"></i>
+            <h5>Manage Category</h5></a></li>
+            <li><a href="manage-comments.php"><i class="uil uil-comment-dots"></i>
+            <h5>Manage Comments</h5></a></li>
+            <li><a href="manage-support.php" class="active"><i class="uil uil-envelope"></i>
+            <h5>Manage Support</h5></a></li>
+            <?php endif ?>
+        </ul>
+    </aside>
         <main>
             <h2>Manage Support Messages</h2>
             <?php if (mysqli_num_rows($support_messages) > 0) : ?>
@@ -86,9 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['support_id'])) {
                                 <td><?= htmlspecialchars($message['message']) ?></td>
                                 <td><?= htmlspecialchars($message['created_at']) ?></td>
                                 <td>
-                                    <form action="manage-support.php" method="post">
+                                    <form class="support" action="manage-support.php" method="post">
                                         <input type="hidden" name="support_id" value="<?= $message['support_id'] ?>">
-                                        <input type="checkbox" name="resolved" <?= $message['resolved'] ? 'checked' : '' ?> onChange="this.form.submit()">
+                                        <input class="checkbox" type="checkbox" name="resolved" <?= $message['resolved'] ? 'checked' : '' ?> onChange="this.form.submit()">
                                     </form>
                                 </td>
                                 <td><a href="delete-support.php?id=<?= $message['support_id'] ?>" class="btn sm danger">Delete</a></td>

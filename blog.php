@@ -8,7 +8,7 @@ $posts = mysqli_query($connection, $query);
 
 <section class="search__bar">
     <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
-        <div>
+        <div class="search-bar">
             <i class="uil uil-search"></i>
             <input type="search" name="search" placeholder="Search">
             <button type="submit" name="submit" class="btn">Go</button>

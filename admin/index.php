@@ -37,7 +37,7 @@ $posts = mysqli_query($connection, $query);
         </p>
     </div>
     <?php elseif(isset($_SESSION['edit-post'])) : //SHOWS IF EDIT POST WAS NOT SUCCESSFUL ?>
-    <div class="success-message container">
+    <div class="error-message container">
         <p>
             <?php 
             echo $_SESSION['edit-post'];
@@ -46,7 +46,7 @@ $posts = mysqli_query($connection, $query);
         </p>
     </div>
     <?php elseif(isset($_SESSION['delete-post'])) : //SHOWS IF DELETE POST WAS NOT SUCCESSFUL ?>
-    <div class="success-message container">
+    <div class="error-message container">
         <p>
             <?php 
             echo $_SESSION['delete-post'];
@@ -123,7 +123,6 @@ $posts = mysqli_query($connection, $query);
     </main>
     </div>
 </section>
-
 
 <?php
 include '../partials/footer.php';

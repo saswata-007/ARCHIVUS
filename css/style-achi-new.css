@@ -127,6 +127,8 @@ nav{
     height: 4rem;
     border-radius: 50%;
     overflow: hidden;
+    border: .2rem solid var(--color-bg);
+    background: var(--color-white);
 }
 .nav__logo {
     font-weight: 700;
@@ -136,7 +138,7 @@ nav{
     margin-left: 2rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 
 }
 .nav__items {
@@ -360,33 +362,26 @@ footer ul a:hover {
 
 
 .search__bar {
-    margin: 7rem 9rem;
+    margin: 7rem;
 }
 .search__bar-container {
-    width:30rem;
+    
     position: relative;
     margin-left:22rem;
+    margin-right: 40rem;
     background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     overflow: hidden;
     padding: .6rem 1rem;
     border-radius: var(--card-border-radius-2);
     color: var(--color-gray-300)
 }
 .search__bar input {
-    width:22rem;
     background: transparent;
-    margin-left: .5rem;
-    padding: .5rem 1;
-    color:white;
-}
-.search-bar{                                      /*search bar*/
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-.search-bar i{                              
-    padding-top: 0.5rem;
-}
-.search-bar ::placeholder{
+    margin-left: .7rem;
+    padding: .5rem 0;
     color:white;
 }
 /* =============================button style============================== */
@@ -413,6 +408,7 @@ footer ul a:hover {
     padding: 15rem;
 }
 /* ==========================================================category title========================================= */
+
 .category__title {
     height: 15rem;
     margin-top: 4.5rem;
@@ -422,16 +418,19 @@ footer ul a:hover {
 }
 /* ==========================================contact===================================================================== */
 .contact_container {
-    padding: 2rem 45rem;
+    padding: 10rem 45rem;
 }
 .contact_container form{
     background-color: var(--color-bg);
 }
-.contact{                                       /*contact*/
-    margin-left:40rem;
-    margin-top: 6rem;
-
+.contact_container .abc{
+    width:100vh;
 }
+.contact_container h2{
+    width:40vh;
+}
+
+    
 /*-----------------------------------------------sign up page--------------------------------------------*/
 
 .form__section {
@@ -441,66 +440,45 @@ footer ul a:hover {
     height: 100vh;
 }
 .form__section-container {
-    padding-left: 15rem;                   
+    padding-left: 15rem;
     width: var(--form-weidth);
 }
 .form__section-container h2{
     margin-top:2rem;
-    padding-left: 9rem;                      
+    padding-left: 9rem;
 }
-.form__section-container-addpost {
-    padding-left: 18rem;                   
-    width: var(--form-weidth);
-}                                                   /*add post**/
-.addpost{
-    margin-top:2rem;
-    padding-left: 6.5rem;                      
-}
-
-.form__section-container-adduser {
-    padding-left: 15rem;                   
-    width: var(--form-weidth);                      /*add user*/
-}
-.adduser {
-    margin-top:2rem;
-    padding-left: 10rem;                      
-}
-
-.form__section-container-addcat{
-    padding-left: 15rem;                            /*add category*/
+.form__section-containers {
+    padding-left: 15rem;
     width: var(--form-weidth);
 }
-.addcat{
+.form__section-containers h2{
     margin-top:2rem;
     padding-left: 5rem;
 }
-
-.form__section-container-editcat {
+.form__section-container-cat {
     padding-left: 15rem;
-    width: var(--form-weidth);                      /*edit category*/
+    width: var(--form-weidth);
 }
-.editcat{
+.form__section-container-cat h2{
     margin-top:2rem;
     padding-left: 5rem;
 }
-.form__section-container-editpost {
+.form__section-container-post {
     padding-left: 15rem;
     width: var(--form-weidth);
-}                                                       /*edit post*/
-.editpost{
-    margin-top:2rem;
-    padding-left: 7rem;
 }
-
-.form__section-container-edituser {
-    padding-left: 15rem;                                /*edit user*/
+.form__section-container-post h2{
+    margin-top:2rem;
+    padding-left: 6rem;
+}
+.form__section-container-user {
+    padding-left: 15rem;
     width: var(--form-weidth);
 }
-.edituser{
+.form__section-container-user h2{
     margin-top:2rem;
-    padding-left: 110px;
+    padding-left: 105px;
 }
-
 form {
 
     display: flex;
@@ -624,22 +602,10 @@ input, textarea, select {
     color: var(--color-white);
     transition: var(--transition);
 }
-.support .checkbox{                                  /*resolve*/
-    padding-left: 2rem;
-    width:5rem;
-}
+
 /* ======================================================================================sign in=================================================== */
-.pp {
-    display: inline-block; 
-    width: 40px; 
-    height: 40px; 
-    object-fit: cover; 
-    border-radius: 50%; 
-    margin-right: 10px;
-}
-.text-black{
-    color: #000000;
-}
+
+
 .SIGNIN{
     margin-bottom: 1rem;
     padding-top: 50px;
@@ -702,17 +668,7 @@ input, textarea, select {
     border-radius:10px;
     
 }
-.signup-button{
-    width:15rem;
-    color:var(--color-gray-900);
-    border:2px solid var(--color-gray-900);
-    transition: 0.3s;
-}
-.signup-button:hover{
-    background-color: var(--color-gray-900);
-    color:white;
 
-}
 .container .form-content{
     padding-left: 20px;
     display:flex;
@@ -823,19 +779,7 @@ form .form-content .text a{
 form .form-content .text a:hover{
     color:var(--color-bg);
 }
-
-form .form-content .error_message p{
-    margin-left: 17rem;
-    width:20rem;
-    margin-top:10px;                            /*signup /sigin error*/
-    padding:0.8rem 1.4rem;
-    background-color: rgb(228, 91, 91);
-    border:3px solid red;
-    border-radius:7px;
-    color:white;
-}
-.error-message {
-    margin-bottom:1rem;                             /*error message*/
+form .form-content .error-message p{
     margin-top:10px;
     padding:0.8rem 1.4rem;
     background-color: rgb(228, 91, 91);
@@ -843,20 +787,8 @@ form .form-content .error_message p{
     border-radius:7px;
     color:white;
 }
-
-form .form-content .success_message p{
-    margin-left: 17rem;
-    width:20rem;
-    margin-top:20px;                                /*signup /sigin success*/
-    padding:0.8rem 1.4rem;
-    background-color: rgba(147, 222, 127, 0.756);
-    border:3px solid rgb(15, 164, 18);
-    border-radius:7px;
-    color:white;
-}
-.success-message {
-    margin-bottom:1rem;
-    margin-top:20px;                                    /*success message*/
+form .form-content .success-message p{
+    margin-top:20px;
     padding:0.8rem 1.4rem;
     background-color: rgba(147, 222, 127, 0.756);
     border:3px solid rgb(15, 164, 18);
@@ -865,6 +797,7 @@ form .form-content .success_message p{
 }
 .post .post-body{
     width:300px;
+
 }
 .post{
     padding-top:2rem;

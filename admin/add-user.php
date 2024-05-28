@@ -15,10 +15,10 @@ unset($_SESSION['add-user-data']);
 ?>
 
     <section class="form__section">
-        <div class="container form__section-container">
-            <h2>Add User</h2>
+        <div class="container form__section-container-adduser">
+            <h2 class="adduser">Add User</h2>
             <?php if(isset($_SESSION['add-user'])) : ?>
-                <div class="alert__message error">
+                <div class="error-message">
                 <p>
                     <?php
                         echo $_SESSION['add-user'];
