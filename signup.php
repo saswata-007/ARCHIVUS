@@ -69,7 +69,8 @@ $posts = mysqli_query($connection, $query);
                         </div>
                         <div class="input-box">
                             <i class="ri-lock-line"></i>
-                            <input type="password" name="confirmpassword" value="<?php echo htmlspecialchars($confirmpassword); ?>" placeholder="confirm password">
+                            <input id="confirmpassword" class="confirm__password" type="password" name="confirmpassword" value="<?php echo htmlspecialchars($confirmpassword); ?>" placeholder="confirm password">
+                            <img id="eyeicon" class="eye" src="./images/eye-close.png" alt="">
                         </div>
                         <div class="form-control">
                             <label for="avatar">profile picture</label>
@@ -117,6 +118,21 @@ $posts = mysqli_query($connection, $query);
     </div> 
     </div>
     
+<script>
+    let eyeicon = document.getElementById("eyeicon");
+    let confirmpassword = document.getElementById("confirmpassword");
+
+    eyeicon.onclick = function(){
+        if(confirmpassword.type == "password"){
+            confirmpassword.type = "text";
+            eyeicon.src = "./images/eye-open.png";
+        } else{
+            confirmpassword.type = "password";
+            eyeicon.src = "./images/eye-close.png";
+
+        }
+    }
+</script>
 </body>
 </html>
 

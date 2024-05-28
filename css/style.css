@@ -285,7 +285,7 @@ nav{
 
 .singlepost__container {
     width: var(--form-weidth);
-    background:var(--color-primary-light);
+    background:var(--color-gray-700);
     padding: 1rem 2rem 3rem;
     border-radius: var(--card-border-radius-4);
 }
@@ -430,7 +430,9 @@ footer ul a:hover {
 .contact{                                       /*contact*/
     margin-left:40rem;
     margin-top: 6rem;
-
+}
+.contact__message{
+    margin-top: 5rem;
 }
 /*-----------------------------------------------sign up page--------------------------------------------*/
 
@@ -625,8 +627,8 @@ input, textarea, select {
     transition: var(--transition);
 }
 .support .checkbox{                                  /*resolve*/
-    padding-left: 2rem;
-    width:5rem;
+    margin-left: 3rem;
+    width:3rem;
 }
 /* ======================================================================================sign in=================================================== */
 .pp {
@@ -682,7 +684,7 @@ input, textarea, select {
     width:100%;
     outline: none;
     border:none;
-    padding:0 10px;
+    padding:17px 10px;
     font-size:16px;
     font-weight: 300;
     border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -824,8 +826,17 @@ form .form-content .text a:hover{
     color:var(--color-bg);
 }
 
-form .form-content .error_message p{
+.SIGNUP form .form-content .error_message p{
     margin-left: 17rem;
+    width:20rem;
+    margin-top:10px;                            /*signup /sigin error*/
+    padding:0.8rem 1.4rem;
+    background-color: rgb(228, 91, 91);
+    border:3px solid red;
+    border-radius:7px;
+    color:white;
+}
+.SIGNIN form .form-content .error_message p{
     width:20rem;
     margin-top:10px;                            /*signup /sigin error*/
     padding:0.8rem 1.4rem;
@@ -845,7 +856,6 @@ form .form-content .error_message p{
 }
 
 form .form-content .success_message p{
-    margin-left: 17rem;
     width:20rem;
     margin-top:20px;                                /*signup /sigin success*/
     padding:0.8rem 1.4rem;
@@ -887,6 +897,17 @@ form .form-content .success_message p{
     transition:0.3s;
 }
 .post-thumbnail img:hover{
+    border:3px solid ;
+}
+.post-thumbnail-image{
+    width:18rem;
+    border:0.3rem solid white;                       /*sign in/up image*/
+    overflow: hidden;
+    filter:saturate(0);
+    border-radius: 0.8rem;
+    transition:0.3s;
+}
+.post-thumbnail-image img:hover{
     border:3px solid ;
 }
 .Pinterest a{
@@ -1018,3 +1039,21 @@ form .form-content .success_message p{
     background-color: var(--color-bg);  
 }
 
+/* Password show/hide */
+
+.eye{
+    width: 25px;
+    cursor: pointer;
+    margin-right: 17rem;
+}
+.confirm__password{
+    width: 100%;
+    padding: 10px 0;
+    border: 0;
+    outline: 0;
+    color: #555;
+}
+.eye__Signin{
+    width: 25px;
+    cursor: pointer;
+}

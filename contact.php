@@ -1,17 +1,7 @@
 <?php
 require 'partials/header.php';
 
-// Check for success message
-if (isset($_SESSION['success'])) {
-    echo '<div class="success-message">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']); // Remove success message after displaying
-}
 
-// Check for error message
-if (isset($_SESSION['error'])) {
-    echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']); // Remove error message after displaying
-}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +16,20 @@ if (isset($_SESSION['error'])) {
 
 <!-- Contact Form -->
 <section class="contact-form">
-    <div>
+    <div class="contact__message">
+        <?php
+    // Check for success message
+if (isset($_SESSION['success'])) {
+    echo '<div class="success-message">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']); // Remove success message after displaying
+}
+
+// Check for error message
+if (isset($_SESSION['error'])) {
+    echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
+    unset($_SESSION['error']); // Remove error message after displaying
+}
+        ?>
         <h2 class="contact">Contact Us</h2>
         <form action="<?= ROOT_URL ?>contact_submit.php" method="post" class="contact_container">
             <input type="text" name="name" placeholder="Your Name" required>

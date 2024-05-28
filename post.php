@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
 
         <?php if(mysqli_num_rows($comment_result) > 0): ?>
             <?php while($comment = mysqli_fetch_assoc($comment_result)): ?>
-                <div class="comment">
+                <div class="comments">
                     <div class="comment__author-avatar">
                         <img class="pp" src="./uploads/<?= htmlspecialchars($comment['profile_picture']) ?>">
                     </div>

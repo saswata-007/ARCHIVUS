@@ -32,6 +32,8 @@ $posts = mysqli_query($connection, $query);
                 <div class="form-content">
                     <div class="login-form">
                         <h3 class="title">Sign In</h3>
+                        
+                        <div class="input-boxes">
                         <?php if (isset($_SESSION['signup-success'])) : ?>
                             <div class="success_message">
                                 <p>
@@ -51,14 +53,14 @@ $posts = mysqli_query($connection, $query);
                                 </p>
                             </div>
                         <?php endif ?>
-                        <div class="input-boxes">
                             <div class="input-box">
                                 <i class="ri-file-user-line"></i>
                                 <input type="text" name="username_email" value="<?php echo htmlspecialchars($username_email); ?>" placeholder="Enter email or username">
                             </div>
                             <div class="input-box">
                                 <i class="ri-lock-line"></i>
-                                <input type="password" name="password" value="<?php echo htmlspecialchars($password); ?>" placeholder="Enter password">
+                                <input id="confirmpassword" class="confirm__password" type="password" name="password" value="<?php echo htmlspecialchars($password); ?>" placeholder="Enter password">
+                                <img id="eyeicon" class="eye__Signin" src="./images/eye-close.png" alt="">
                             </div>
                             <small class="text"><a href="#">Forgot password? </a></small>
                             <div class="btn input-box">
@@ -103,7 +105,7 @@ $posts = mysqli_query($connection, $query);
                                 </small>
                             </div>
                         </div>
-                        <div class="post-thumbnail">
+                        <div class="post-thumbnail-image">
                             <img src="./uploads/<?= $post['thumbnail'] ?>">
                         </div>
                         <div class="post-body">
@@ -116,7 +118,21 @@ $posts = mysqli_query($connection, $query);
         </div>
     </div>
 </body>
+<script>
+    let eyeicon = document.getElementById("eyeicon");
+    let confirmpassword = document.getElementById("confirmpassword");
 
+    eyeicon.onclick = function(){
+        if(confirmpassword.type == "password"){
+            confirmpassword.type = "text";
+            eyeicon.src = "./images/eye-open.png";
+        } else{
+            confirmpassword.type = "password";
+            eyeicon.src = "./images/eye-close.png";
+
+        }
+    }
+</script>
 </html>
 <?php
 include 'partials/footer.php';

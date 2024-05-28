@@ -28,8 +28,9 @@ if (isset($_GET['id'])) {
                     <option value="<?= $category['id'] ?>" <?= $category['id'] == $post['category_id'] ? 'selected' : '' ?>><?= $category['title'] ?></option>
                 <?php endwhile ?>
             </select>
-            <?php if(isset($_SESSION['user_is_moderator'])) : ?>
+            
             <textarea rows="10" cols="71" name="body" placeholder="Body"><?= $post['body'] ?></textarea>
+            <?php if(isset($_SESSION['user_is_moderator'])) : ?>
             <div class="form__control inline">
                 <input type="checkbox" name="is_featured" id="is_featured" value="1" <?= $post['is_featured'] ? 'checked' : '' ?>>
                 <label for="is_featured">Featured</label>
